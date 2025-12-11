@@ -1,0 +1,14 @@
+[project]
+name = "ai-challenge"
+version = "0.1.0"
+description = "AI Challenge for AI Backend Development"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "google-genai>=1.54.0",
+    "pydantic>=2.12.5",
+    "pymupdf>=1.26.6",
+    "pytest>=9.0.2",
+    "python-dotenv>=1.2.1",
+    "streamlit>=1.52.1",
+]
