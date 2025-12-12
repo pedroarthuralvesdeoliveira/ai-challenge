@@ -79,8 +79,8 @@ uploaded_file = st.file_uploader(
 
 if uploaded_file is not None:
     type = uploaded_file.name.split(".")[-1]
-    print(f"File uploaded: {uploaded_file.name} with type {uploaded_file.type}")
     temp_path = Path(f"temp_contract.{type}")
+    
     with open(temp_path, "wb") as f:
         f.write(uploaded_file.getbuffer())
     

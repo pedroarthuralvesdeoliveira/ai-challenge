@@ -29,7 +29,6 @@ def extract_text_from_pdf(path: Union[str, Path]) -> str:
         full_text = "\n\n".join(p.strip() for p in pages_text if p and p.strip())
         if not full_text.strip():
             try: 
-                print("Attempting to extract text from image...")
                 full_text = extract_text_from_image(str(path))
             except Exception as e:
                 raise ValueError("No text found in the PDF") from e
@@ -45,7 +44,6 @@ def extract_text_from_image(path: Union[str, Path]) -> str:
     """
     path = Path(path)
     if not path.exists():
-        print(f"Image file not found: {path}")
         raise FileNotFoundError(f"Image file not found: {path}")
 
     try:
@@ -57,10 +55,6 @@ def extract_text_from_image(path: Union[str, Path]) -> str:
             if "rec_texts" in res:
                 full_text += " ".join(res["rec_texts"]) + "\n\n"
         
-        # Print the extracted text
-        print(f"Extracted text from image: {full_text}")
-        
-        # Return the extracted text
         return full_text.strip()
     except Exception as e:
         raise RuntimeError(f"Failed to extract text from image using PaddleOCR: {e}") from e
