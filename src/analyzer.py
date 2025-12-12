@@ -51,7 +51,6 @@ def analyze_contract_with_gemini(
         
         response_text = response.text.strip()
         
-        # Limpeza (safety net contra markdown)
         if response_text.startswith("```json"):
             response_text = response_text[7:]
         if response_text.startswith("```"):
