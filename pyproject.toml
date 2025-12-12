@@ -6,6 +6,8 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "google-genai>=1.54.0",
+    "paddleocr[all]>=3.3.2",
+    "paddlepaddle>=3.2.2",
     "pydantic>=2.12.5",
     "pymupdf>=1.26.6",
     "pytest>=9.0.2",

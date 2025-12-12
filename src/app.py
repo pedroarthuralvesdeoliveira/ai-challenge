@@ -1,14 +1,10 @@
 import json
 import os
 import streamlit as st
-from dotenv import load_dotenv
 from pathlib import Path
 
 from parser import extract_text_from_pdf
 from analyzer import analyze_contract_with_gemini, analyze_contract_with_gemini_pro
-
-# Load environment variables
-load_dotenv()
 
 # Page config
 st.set_page_config(
@@ -77,13 +73,14 @@ with st.sidebar:
 # Main content
 uploaded_file = st.file_uploader(
     "Upload Contract (PDF)",
-    type=["pdf"],
+    type=["pdf", "png", "jpg", "jpeg", "docx", "xlsx", "txt", "csv"],
     help="Upload a contract document for risk analysis"
 )
 
 if uploaded_file is not None:
-    # Save uploaded file temporarily
-    temp_path = Path("temp_contract.pdf")
+    type = uploaded_file.name.split(".")[-1]
+    temp_path = Path(f"temp_contract.{type}")
+    
     with open(temp_path, "wb") as f:
         f.write(uploaded_file.getbuffer())
     
@@ -106,12 +103,12 @@ if uploaded_file is not None:
                 st.info("👉 Get a free API key at https://aistudio.google.com/apikey")
             else:
                 # Step 1: Extract text
-                with st.spinner("📄 Extracting text from PDF..."):
+                with st.spinner("📄 Extracting text from file..."):
                     try:
                         contract_text = extract_text_from_pdf(temp_path)
                         
                         if len(contract_text.strip()) < 50:
-                            st.warning("⚠️ Very little text extracted. The PDF might be scanned or image-based.")
+                            st.warning("⚠️ Very little text extracted. The file might be scanned or image-based.")
                         
                         # Show extraction stats
                         char_count = len(contract_text)
@@ -129,7 +126,7 @@ if uploaded_file is not None:
                 
                 # Step 2: Analyze with Gemini
                 if contract_text:
-                    with st.spinner(f"🤖 Analyzing contract with {model_choice}..."):
+                    with st.spinner(f"🤖 Analyzing data with {model_choice}..."):
                         try:
                             # Choose analysis function based on model
                             if "pro" in model_choice:
