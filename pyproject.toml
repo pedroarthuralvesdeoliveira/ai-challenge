@@ -10,7 +10,6 @@ dependencies = [
     "paddlepaddle>=3.2.2",
     "pydantic>=2.12.5",
     "pymupdf>=1.26.6",
-    "pymupdf4llm>=0.2.7",
     "pytest>=9.0.2",
     "python-dotenv>=1.2.1",
     "streamlit>=1.52.1",
